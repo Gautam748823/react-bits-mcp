@@ -127,4 +127,10 @@ function createServer() {
   return server;
 }
 
-export default createMcpHandler(createServer);
+const mcpHandler = createMcpHandler(createServer);
+
+export default {
+  fetch(request: Request, env: unknown, ctx: ExecutionContext) {
+    return mcpHandler(request, env, ctx);
+  }
+} satisfies ExportedHandler;
